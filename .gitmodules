@@ -1,0 +1,9 @@
+[submodule "buildroot"]
+	path = buildroot
+	url = https://github.com/KOR-DYLAN/buildroot.git
+[submodule "qemu"]
+	path = qemu
+	url = https://github.com/qemu/qemu.git
+[submodule "linux-rpi"]
+	path = linux-rpi
+	url = https://github.com/KOR-DYLAN/linux-rpi.git
