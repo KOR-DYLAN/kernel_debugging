@@ -10,9 +10,11 @@ BOOTARG_FILE	?=resource/bootcmd.txt
 BOOTARGS		?=$(shell cat $(BOOTARG_FILE))
 QFLAGS			+=--rng device=/dev/urandom,model=virtio -serial stdio -no-reboot -device usb-kbd -device usb-tablet -device usb-net,netdev=net0 -netdev user,id=net0,hostfwd=tcp::2222-:22
 
+phony+=run
 run:
 	$(QEMU) -m $(DRAM) -M $(MACHINE) -kernel $(KERNEL_IMG) -dtb $(FDT_IMG) -drive format=raw,file=$(SDC_IMG) -append $(BOOTARGS)  $(QFLAGS)
 	
+phony+=cvtimg
 cvtimg:
 # Resize the image to 8GB (it should be a power of 2)
 	$(QEMU_IMG) resize $(SDC_IMG) 2G
