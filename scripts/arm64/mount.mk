@@ -1,4 +1,4 @@
-RASPIOS 	:=resource/2020-08-20-raspios-buster-arm64.img
+RASPIOS 	:=resource/2020-08-20-raspios-buster-arm64-lite.img
 
 phony+=mount
 mount:

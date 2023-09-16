@@ -37,7 +37,7 @@ install: mount
 	sudo cp $(KERNEL_OUTPUT)/arch/$(ARCH)/boot/dts/overlays/*.dtb* $(BOOT_DIR)/overlays/
 	sudo cp $(KERNEL_OUTPUT)/arch/$(ARCH)/boot/dts/*.dtb $(BOOT_DIR)/
 # to output
-	mkdir -p $(OUTPUT)/boot && cp $(KERNEL_OUTPUT)/arch/$(ARCH)/boot/dts/*.dtb $(OUTPUT)/boot/
-	cp $(KERNEL_OUTPUT)/arch/$(ARCH)/boot/zImage $(OUTPUT)/$(KERNEL).img
+	mkdir -p $(OUTPUT)/$(ARCH)/boot && cp $(KERNEL_OUTPUT)/arch/$(ARCH)/boot/dts/*.dtb $(OUTPUT)/$(ARCH)/boot/
+	cp $(KERNEL_OUTPUT)/arch/$(ARCH)/boot/zImage $(OUTPUT)/$(ARCH)/boot/$(KERNEL).img
 	echo "pwd: $(PWD)"
 	$(MAKE) ARCH=$(ARCH) umount

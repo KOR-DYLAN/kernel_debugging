@@ -1,4 +1,4 @@
-RASPIOS 	:=resource/2020-08-20-raspios-buster-armhf.img
+RASPIOS 	:=resource/2020-08-20-raspios-buster-armhf-lite.img
 
 phony+=mount
 mount:
@@ -17,5 +17,3 @@ umount:
 	sudo umount $(PWD)/rootfs
 	sudo losetup -d $(LOOP_DEV)
 	rm -f loopdev.txt
-	rm -rf $(PWD)/boot
-	rm -rf $(PWD)/rootfs

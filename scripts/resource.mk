@@ -6,6 +6,6 @@ get_image:
 ifeq ($(ARIA2C_PATH),)
 	sudo apt install aria2
 endif
+	cd resource && rm -f *.zip
 	aria2c -i $(RASPI_OF_IMG_URL) -d $(DOWNLOAD_DIR)
 	cd resource && unzip '*.zip'
-	cd resource && rm -f *.zip
