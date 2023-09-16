@@ -1,0 +1,1 @@
+"earlyprintk loglevel=8 console=ttyAMA0,115200 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4 dwc_otg.fiq_fsm_enable=0 bcm2708_fb.fbwidth=1280 bcm2708_fb.fbheight=720"
