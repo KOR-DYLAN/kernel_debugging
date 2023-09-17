@@ -7,7 +7,7 @@ echo "installing common packages..."
 sudo apt update
 sudo apt upgrade -y
 sudo apt install    build-essential gcc-multilib g++-multilib gdb cmake llvm lldb clang \
-                    libncurses5 libncurses5-dev libncursesw5 libncursesw5-dev bison flex u-boot-tools \
+                    libncurses5 libncurses5-dev libncursesw5 libncursesw5-dev bison flex u-boot-tools bc \
                     libssl-dev python3-dev python2.7-dev python3-venv net-tools git vim neovim unzip font-manager \
                     mkisofs neovim curl barrier ssh meson tree \
 					language-pack-en language-pack-ko -y
