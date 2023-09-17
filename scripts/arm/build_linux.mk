@@ -1,15 +1,12 @@
-TOP_DIR			:=$(PWD)
 KSRC_DIR		:=$(TOP_DIR)/linux-rpi-5.4.y
 CROSS_COMPILE	:=arm-none-linux-gnueabihf-
 DEFCONFIG		:=bcm2709_defconfig
 ARCH			:=arm
 KERNEL			:=kernel7
-OUTPUT			:=$(TOP_DIR)/output
 KERNEL_OUTPUT	:=$(OUTPUT)/$(ARCH)/linux
 BOOT_DIR		:=$(TOP_DIR)/boot
 ROOTFS_DIR		:=$(TOP_DIR)/rootfs
 TARGET			:=zImage modules dtbs
-NPROC			:=$(shell nproc)
 
 phony+=defconfig
 defconfig:
@@ -28,7 +25,7 @@ build:
 	$(MAKE) -C $(KSRC_DIR) CROSS_COMPILE=$(CROSS_COMPILE) ARCH=$(ARCH) KERNEL=$(KERNEL) O=$(KERNEL_OUTPUT) $(TARGET) -j $(NPROC)
 
 phony+=install
-install: mount
+install: img_mount
 	sudo $(MAKE) -C $(KSRC_DIR) CROSS_COMPILE=$(CROSS_COMPILE) ARCH=$(ARCH) KERNEL=$(KERNEL) O=$(KERNEL_OUTPUT) INSTALL_MOD_PATH=$(ROOTFS_DIR) modules_install -j $(NPROC)
 # rm symbolic link
 	sudo rm -f $(ROOTFS_DIR)/lib/modules/build
@@ -40,4 +37,4 @@ install: mount
 	mkdir -p $(OUTPUT)/$(ARCH)/boot && cp $(KERNEL_OUTPUT)/arch/$(ARCH)/boot/dts/*.dtb $(OUTPUT)/$(ARCH)/boot/
 	cp $(KERNEL_OUTPUT)/arch/$(ARCH)/boot/zImage $(OUTPUT)/$(ARCH)/boot/$(KERNEL).img
 	echo "pwd: $(PWD)"
-	$(MAKE) ARCH=$(ARCH) umount
+	$(MAKE) ARCH=$(ARCH) img_umount
