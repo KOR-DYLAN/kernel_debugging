@@ -47,6 +47,9 @@ QTARTGET	:=aarch64-softmmu,arm-softmmu
 
 qconfig:
 	mkdir -p $(QBIN_DIR)
+	sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
+	sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+	sudo apt-get update
 	sudo apt build-dep qemu -y
 	sudo apt install $(QPACKAGES) -y
 	cd $(QBIN_DIR) && $(QSRC_DIR)/configure --target-list=$(QTARTGET) $(QCONFIG)
