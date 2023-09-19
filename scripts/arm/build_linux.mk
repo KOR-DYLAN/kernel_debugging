@@ -27,6 +27,11 @@ build:
 phony+=install
 install: img_mount
 	sudo $(MAKE) -C $(KSRC_DIR) CROSS_COMPILE=$(CROSS_COMPILE) ARCH=$(ARCH) KERNEL=$(KERNEL) O=$(KERNEL_OUTPUT) INSTALL_MOD_PATH=$(ROOTFS_DIR) modules_install -j $(NPROC)
+# update nfs mount script
+	sudo mkdir -p $(ROOTFS_DIR)/root/nfs
+	echo "#!/bin/bash" | sudo tee $(ROOTFS_DIR)/root/mount.sh
+	echo "mount -t nfs $(HOST_IP):/nfsroot nfs" | sudo tee -a $(ROOTFS_DIR)/root/mount.sh
+	sudo chmod +x $(ROOTFS_DIR)/root/mount.sh
 # rm symbolic link
 	sudo rm -f $(ROOTFS_DIR)/lib/modules/build
 	sudo rm -f $(ROOTFS_DIR)/lib/modules/source
