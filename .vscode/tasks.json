@@ -14,6 +14,33 @@
                 "kind": "build",
                 "isDefault": true
             },
+        },
+        {
+            "type": "shell",
+            "label": "extract asm of linux",
+            "command": "/opt/aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-objdump",
+            "args": [
+                "--start-address=0x${input:start-address}",
+                "--stop-address=0x${input:stop-address}",
+                "-d", "${workspaceFolder}/output/arm64/linux/vmlinux",
+                "|", "more", ">", "${workspaceFolder}/output/arm64/linux/vmlinux_${input:start-address}_to_${input:stop-address}.asm"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        }
+    ],
+    "inputs": [
+        {
+            "id": "start-address",
+            "description": "enter start address of vmlinux",
+            "type": "promptString",
+        },
+        {
+            "id": "stop-address",
+            "description": "enter stop address of vmlinux",
+            "type": "promptString",
         }
     ]
 }

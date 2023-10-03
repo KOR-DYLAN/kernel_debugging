@@ -8,6 +8,8 @@ BOOT_DIR		:=$(TOP_DIR)/boot
 ROOTFS_DIR		:=$(TOP_DIR)/rootfs
 TARGET			:=Image modules dtbs
 
+OD				:=$(CROSS_COMPILE)objdump
+
 phony+=defconfig
 defconfig:
 	$(MAKE) -C $(KSRC_DIR) CROSS_COMPILE=$(CROSS_COMPILE) ARCH=$(ARCH) KERNEL=$(KERNEL) O=$(KERNEL_OUTPUT) $(DEFCONFIG)
@@ -23,6 +25,10 @@ xconfig:
 phony+=build
 build:
 	$(MAKE) -C $(KSRC_DIR) CROSS_COMPILE=$(CROSS_COMPILE) ARCH=$(ARCH) KERNEL=$(KERNEL) O=$(KERNEL_OUTPUT) $(TARGET) -j $(NPROC)
+# all-headers
+	$(OD) -x $(KERNEL_OUTPUT)/vmlinux | more > $(KERNEL_OUTPUT)/vmlinux.hdr
+# disassemble
+	$(OD) -d $(KERNEL_OUTPUT)/vmlinux | more > $(KERNEL_OUTPUT)/vmlinux.asm
 
 phony+=install
 install: img_mount
