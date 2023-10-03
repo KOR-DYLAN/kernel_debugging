@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "make compiledb of linux",
+            "command": "/usr/bin/python3",
+            "args": [
+                "linux-rpi-5.4.y/scripts/gen_compile_commands.py",
+                "-d", "${workspaceFolder}/output/arm64/linux",
+                "-o", "${workspaceFolder}/.vscode/compile_commands.json"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        }
+    ]
+}
