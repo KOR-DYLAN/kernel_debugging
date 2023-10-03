@@ -1,2 +1,7 @@
 output/
+rootfs/
+boot/
+scripts/*.txt
 resource/*
+.vscode/compile_commands.json
+.vscode/settings.json
